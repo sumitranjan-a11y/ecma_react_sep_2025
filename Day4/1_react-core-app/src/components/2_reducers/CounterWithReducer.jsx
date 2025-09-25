@@ -93,7 +93,7 @@ Counter.propTypes = {
     interval: PropTypes.number,
 };
 
-const CounterAssignment = () => {
+const CounterWithReducer = () => {
     const counterRef = useRef(null);
     const [message, setMessage] = useState("");
 
@@ -131,4 +131,4 @@ const CounterAssignment = () => {
     );
 };
 
-export default CounterAssignment;
+export default CounterWithReducer;

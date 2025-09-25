@@ -1,10 +1,13 @@
-// import CounterAssignment from '../1_assignment/CounterAssignment';
-import CounterAssignment from '../2_reducers/CounterAssignment';
+import CounterAssignment from '../1_assignment/CounterAssignment';
+import CounterWithReducer from '../2_reducers/CounterWithReducer';
+import CounterWithContext from '../3_context/CounterWithContext';
 
 const RootComponent = () => {
     return (
         <div className='container'>
-            <CounterAssignment />
+            {/* <CounterAssignment /> */}
+            {/* <CounterWithReducer /> */}
+            <CounterWithContext />
         </div>
     );
 };
