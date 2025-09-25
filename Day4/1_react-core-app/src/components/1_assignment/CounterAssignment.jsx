@@ -80,13 +80,17 @@
 
 // export default CounterAssignment;
 
-import React, { useState, useRef, useCallback, useImperativeHandle } from 'react';
+import React, { useState, useRef, useCallback, useImperativeHandle, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const Counter = React.forwardRef(({ interval = 1 }, ref) => {
+const Counter = React.forwardRef(({ interval = 1, onMax }, ref) => {
     const [count, setCount] = useState(0);
     const [flag, setFlag] = useState(false);
     const clickCount = useRef(0); // Replaces this.clickCount
+
+    useEffect(()=>{
+        onMax(flag);
+    }, [flag, onMax])
 
     const manageClickCount = useCallback(() => {
         clickCount.current++;
@@ -157,6 +161,7 @@ Counter.propTypes = {
 
 const CounterAssignment = () => {
     const counterRef = useRef(null);
+    const [message, setMessage] = useState("");
 
     const p_reset = () => {
         console.log(counterRef);
@@ -165,9 +170,18 @@ const CounterAssignment = () => {
         }
     }
 
+    const updateMessage = (flag) => {
+        if (flag) {
+            setMessage("Max click reached, please reset to continue...");
+        } else {
+            setMessage("");
+        }
+    }
+
     return (
         <div>
-            <Counter ref={counterRef} />
+            {message && <h2 className='text-center'>{message}</h2>}
+            <Counter ref={counterRef} onMax={updateMessage}/>
             <hr />
             <div className="d-grid gap-2 mx-auto col-6 mt-4">
                 <button className="btn btn-warning" onClick={p_reset}>
