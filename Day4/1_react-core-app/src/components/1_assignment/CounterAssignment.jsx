@@ -123,16 +123,24 @@ const Counter = ({ interval }) => {
                     value={count}
                     readOnly
                 />
-                <button className="btn btn-info" disabled={flag} onClick={inc}>
-                    <span className="fs-4">+</span>
-                </button>
-                <button className="btn btn-info" disabled={flag} onClick={dec}>
-                    <span className="fs-4">-</span>
-                </button>
-                <button className="btn btn-secondary" disabled={!flag} onClick={reset}>
-                    <span className="fs-4">Reset</span>
-                </button>
+                <CounterControls flag={flag} inc={inc} dec={dec} reset={reset} />
             </div>
+        </>
+    );
+};
+
+const CounterControls = ({ flag, inc, dec, reset }) => {
+    return (
+        <>
+            <button className="btn btn-info" disabled={flag} onClick={inc}>
+                <span className="fs-4">+</span>
+            </button>
+            <button className="btn btn-info" disabled={flag} onClick={dec}>
+                <span className="fs-4">-</span>
+            </button>
+            <button className="btn btn-secondary" disabled={!flag} onClick={reset}>
+                <span className="fs-4">Reset</span>
+            </button>
         </>
     );
 };
