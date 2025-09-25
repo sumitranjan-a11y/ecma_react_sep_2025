@@ -80,7 +80,7 @@
 
 // export default CounterAssignment;
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 const Counter = ({ interval }) => {
@@ -88,28 +88,28 @@ const Counter = ({ interval }) => {
     const [flag, setFlag] = useState(false);
     const clickCount = useRef(0); // Replaces this.clickCount
 
-    const manageClickCount = () => {
+    const manageClickCount = useCallback(() => {
         clickCount.current++;
         if (clickCount.current > 9) {
             setFlag(true);
         }
-    };
+    }, []);
 
-    const inc = () => {
+    const inc = useCallback(() => {
         setCount(prev => prev + interval);
         manageClickCount();
-    };
+    }, [interval, manageClickCount]);
 
-    const dec = () => {
+    const dec = useCallback(() => {
         setCount(prev => prev - interval);
         manageClickCount();
-    };
+    }, [interval, manageClickCount]);
 
-    const reset = () => {
+    const reset = useCallback(() => {
         clickCount.current = 0;
         setCount(0);
         setFlag(false);
-    };
+    }, [interval, manageClickCount]);
 
     return (
         <>
@@ -129,7 +129,9 @@ const Counter = ({ interval }) => {
     );
 };
 
-const CounterControls = ({ flag, inc, dec, reset }) => {
+const CounterControls = React.memo(({ flag, inc, dec, reset }) => {
+    console.log("Counter Controls Rendered...");
+
     return (
         <>
             <button className="btn btn-info" disabled={flag} onClick={inc}>
@@ -143,7 +145,7 @@ const CounterControls = ({ flag, inc, dec, reset }) => {
             </button>
         </>
     );
-};
+});
 
 Counter.propTypes = {
     interval: PropTypes.number,
