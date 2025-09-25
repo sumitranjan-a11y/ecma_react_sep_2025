@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { CounterControls } from './CounterControls';
 import { useCounter } from './CounterContext';
 
-export const Counter = React.forwardRef(({ interval = 1, onMax }, ref) => {
-    const { state, dispatch } = useCounter();
+export const CounterSibling = React.forwardRef(({ interval = 1, onMax }, ref) => {
+    const {state, dispatch} = useCounter();
 
     const clickCount = useRef(0);
 
@@ -42,7 +42,7 @@ export const Counter = React.forwardRef(({ interval = 1, onMax }, ref) => {
     return (
         <>
             <div className="text-center">
-                <h3 className="text-info">Counter Component</h3>
+                <h3 className="text-info">Counter Sibling Component</h3>
             </div>
             <div className="d-grid gap-2 mx-auto col-6">
                 <input
@@ -57,6 +57,6 @@ export const Counter = React.forwardRef(({ interval = 1, onMax }, ref) => {
     );
 });
 
-Counter.propTypes = {
+CounterSibling.propTypes = {
     interval: PropTypes.number,
 };
