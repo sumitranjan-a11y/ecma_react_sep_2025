@@ -80,10 +80,10 @@
 
 // export default CounterAssignment;
 
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 
-const Counter = ({ interval }) => {
+const Counter = React.forwardRef(({ interval = 1 }, ref) => {
     const [count, setCount] = useState(0);
     const [flag, setFlag] = useState(false);
     const clickCount = useRef(0); // Replaces this.clickCount
@@ -111,6 +111,10 @@ const Counter = ({ interval }) => {
         setFlag(false);
     }, [interval, manageClickCount]);
 
+    useImperativeHandle(ref, () => {
+        return { reset };
+    });
+
     return (
         <>
             <div className="text-center">
@@ -127,7 +131,7 @@ const Counter = ({ interval }) => {
             </div>
         </>
     );
-};
+});
 
 const CounterControls = React.memo(({ flag, inc, dec, reset }) => {
     console.log("Counter Controls Rendered...");
@@ -151,17 +155,31 @@ Counter.propTypes = {
     interval: PropTypes.number,
 };
 
-Counter.defaultProps = {
-    interval: 1,
-};
-
 const CounterAssignment = () => {
+    const counterRef = useRef(null);
+
+    const p_reset = () => {
+        console.log(counterRef);
+        if (counterRef.current) {
+            counterRef.current.reset();
+        }
+    }
+
     return (
         <div>
-            <Counter />
+            <Counter ref={counterRef} />
             <hr />
-            <Counter interval={10} />
+            <div className="d-grid gap-2 mx-auto col-6 mt-4">
+                <button className="btn btn-warning" onClick={p_reset}>
+                    <span className='fs-4'>Parent Reset</span>
+                </button>
+            </div>
         </div>
+        // <div>
+        //     <Counter />
+        //     <hr />
+        //     <Counter interval={10} />
+        // </div>
     );
 };
 
