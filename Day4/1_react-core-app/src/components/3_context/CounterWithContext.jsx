@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Counter } from './Counter';
-import { CounterSibling } from './CounterSiblng';
+import { CounterSibling } from './CounterSibling';
 import { CounterProvider } from './CounterContext';
 
 const CounterWithContext = () => {
