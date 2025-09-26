@@ -60,7 +60,7 @@ const TableComponent = (props) => {
     );
 }
 
-const ListRoot = () => {
+const ListRoot1 = () => {
     const [employees] = useState([
         { id: 1, name: "Manish" },
         { id: 2, name: "Abhijeet" },
@@ -106,4 +106,4 @@ const ListRoot = () => {
     );
 };
 
-export default ListRoot;
+export default ListRoot1;

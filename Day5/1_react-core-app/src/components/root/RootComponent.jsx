@@ -1,13 +1,11 @@
-import ListRoot from '../1_working_with_arrays/ListComponent';
+import ListRootMine from '../2_assignment_mine/ListRootMine';
 import ErrorHandler from '../common/ErrorHandler';
 
 const RootComponent = () => {
     return (
-        <ErrorHandler>
-            <div className='container'>
-                <ListRoot />
-            </div>
-        </ErrorHandler>
+        <div className='container'>
+                <ListRootMine />
+        </div>
     );
 };
 
