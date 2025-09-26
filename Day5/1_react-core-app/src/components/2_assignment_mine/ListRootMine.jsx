@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FormComponent from "./FormComponent";
+import FormComponent from "./FormComponentMine";
 import DatabaseComponent from "./DatabaseComponent";
 
 class ListRootMine extends Component {
