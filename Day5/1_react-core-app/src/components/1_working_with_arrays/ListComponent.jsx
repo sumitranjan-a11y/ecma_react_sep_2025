@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import DataTable from '../common/DataTable';
 
 const ListItem = ({ item }) => <li className='list-group-item'>{item.name}</li>
 
@@ -86,13 +87,21 @@ const ListRoot = () => {
     return (
         <div>
             {/* <ListComponent items={employees} /> */}
-            <TableComponent items={employees}>
+            {/* <TableComponent items={employees}>
                 <h3 className='text-center text-info'>Employee Table</h3>
             </TableComponent>
             <hr />
             <TableComponent items={posts}>
                 <h3 className='text-center text-info'>Post Table</h3>
-            </TableComponent>
+            </TableComponent> */}
+            <DataTable items={employees}>
+                <h3 className='text-center text-info'>Employee Table</h3>
+            </DataTable>
+            <hr />
+            <hr />
+            <DataTable items={posts}>
+                <h3 className='text-center text-info'>Post Table</h3>
+            </DataTable>
         </div>
     );
 };
