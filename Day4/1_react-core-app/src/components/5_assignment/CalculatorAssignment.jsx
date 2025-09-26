@@ -294,4 +294,5 @@ const CalculatorAssignment = () => {
     );
 }
 
-export default ErrorHandlerHOC(CalculatorAssignment);
+// export default ErrorHandlerHOC(CalculatorAssignment);
+export default CalculatorAssignment;
