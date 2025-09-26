@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import TextInput from '../common/TextInput';
+import ErrorHandlerHOC from '../common/ErrorHandlerHOC';
 
 class CalculatorOne extends Component {
     constructor(props) {
@@ -280,18 +281,17 @@ const CalculatorFive = () => {
     );
 };
 
-class CalculatorAssignment extends Component {
-    render() {
-        return (
-            <div>
-                {/* <CalculatorOne /> */}
-                {/* <CalculatorTwo /> */}
-                {/* <CalculatorThree /> */}
-                {/* <CalculatorFour /> */}
-                <CalculatorFive />
-            </div>
-        );
-    }
+const CalculatorAssignment = () => {
+    throw new Error("Some Error");
+    return (
+        <div>
+            {/* <CalculatorOne /> */}
+            {/* <CalculatorTwo /> */}
+            {/* <CalculatorThree /> */}
+            {/* <CalculatorFour /> */}
+            <CalculatorFive />
+        </div>
+    );
 }
 
-export default CalculatorAssignment;
+export default ErrorHandlerHOC(CalculatorAssignment);
