@@ -1,9 +1,19 @@
+import authenticatorClient from "./authenticator-api-client";
+
 const url = process.env.REACT_APP_PRODUCTS_API_URL;
 
 const productsAPIClient = {
     getAllProducts: function () {
         var promise = new Promise((resolve, reject) => {
-            return fetch(url).then((res) => {
+
+            let fData = {
+                method: "GET",
+                headers: {
+                    "x-access-token": authenticatorClient.getToken()
+                }
+            };
+
+            fetch(url, fData).then((res) => {
                 var result = res.json();
                 result.then((jResult) => {
                     resolve(jResult);

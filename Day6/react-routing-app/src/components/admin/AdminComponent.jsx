@@ -27,9 +27,8 @@
 
 // export default AdminComponent;
 
-import React, { useEffect, useState } from 'react';
-import DataTable from '../common/DataTable';
 import { useProducts } from '../../contexts/ProductsAPIProvider';
+import DataTable from '../common/DataTable';
 
 const AdminComponent = () => {
     const { products, loading, error } = useProducts()
