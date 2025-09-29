@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { insertProduct, updateProduct } from '../../features/products/productsSlice';
 import ProductFormComponent from './ProductFormComponent';
 
 const ManageProductComponent = () => {
@@ -29,9 +30,9 @@ const ManageProductComponent = () => {
         e.preventDefault();
         try {
             if (id) {
-                // Update
+                await dispatch(updateProduct(product)).unwrap();
             } else {
-                // Insert
+                await dispatch(insertProduct(product)).unwrap();
             }
             navigate('/products');
         } catch (error) {

@@ -9,8 +9,14 @@
     {
       "id": "2",
       "name": "Item Two",
-      "description": "Super Widget",
-      "status": "Not Available"
+      "description": "Widget",
+      "status": "Available"
+    },
+    {
+      "id": "3",
+      "name": "Item Three",
+      "description": "Super Gadget",
+      "status": "Available"
     }
   ]
 }

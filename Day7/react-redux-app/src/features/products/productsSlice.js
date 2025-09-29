@@ -55,6 +55,38 @@ export const productsSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.payload;
             })
+            // Insert Product
+            .addCase(insertProduct.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(insertProduct.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.items.push(action.payload);
+                state.error = null;
+            })
+            .addCase(insertProduct.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            // Update Product
+            .addCase(updateProduct.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(updateProduct.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                const { id, ...updatedProduct } = action.payload;
+                const existingProduct = state.items.find(product => product.id === id);
+                if (existingProduct) {
+                    Object.assign(existingProduct, updatedProduct);
+                }
+                state.error = null;
+            })
+            .addCase(updateProduct.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
     }
 });
 
@@ -63,7 +95,27 @@ export const fetchProducts = createAsyncThunk(
         try {
             return await productsAPIClient.getAllProducts();
         } catch (error) {
-            return rejectWithValue(error.response?.data || 'An error occured');
+            return rejectWithValue(error.message || 'An error occured');
+        }
+    }
+);
+
+export const insertProduct = createAsyncThunk(
+    'products/insertProduct', async (product, { rejectWithValue }) => {
+        try {
+            return await productsAPIClient.insertProduct(product);
+        } catch (error) {
+            return rejectWithValue(error.message || 'Error occurred while adding product');
+        }
+    }
+);
+
+export const updateProduct = createAsyncThunk(
+    'products/updateProduct', async (product, { rejectWithValue }) => {
+        try {
+            return await productsAPIClient.updateProduct(product);
+        } catch (error) {
+            return rejectWithValue(error.message || 'Error occurred while updating product');
         }
     }
 );
