@@ -1,12 +1,22 @@
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import AboutComponent from "../components/about/AboutComponent";
-import HomeComponent from "../components/home/HomeComponent";
-import NoMatchComponent from "../components/no-match/NoMatchComponent";
+
+// Eager Loading
+import LoaderAnimation from "../components/common/LoaderAnimation";
+
+// Lazy Loading
+const AboutComponent = lazy(() => import("../components/about/AboutComponent"));
+const HomeComponent = lazy(() => import("../components/home/HomeComponent"));
+const NoMatchComponent = lazy(() => import("../components/no-match/NoMatchComponent"));
+const CounterRoot = lazy(() => import("../components/counter/CounterRoot"));
 
 export default (
-    <Routes>
-        <Route path="/" element={<HomeComponent />} />
-        <Route path="/about" element={<AboutComponent />} />
-        <Route path="*" element={<NoMatchComponent />} />
-    </Routes>
+    <Suspense fallback={<LoaderAnimation />}>
+        <Routes>
+            <Route path="/" element={<HomeComponent />} />
+            <Route path="/about" element={<AboutComponent />} />
+            <Route path="/counter" element={<CounterRoot />} />
+            <Route path="*" element={<NoMatchComponent />} />
+        </Routes>
+    </Suspense>
 );
