@@ -1,0 +1,21 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../features/products/productsSlice";
+import ProductListComponent from "./ProductListComponent";
+
+const ProductsComponent = () => {
+    const products = useSelector(state => state.products.items);
+    const dispatch = useDispatch();
+
+    useEffect(() => { 
+        dispatch(fetchProducts());
+    }, [dispatch]);
+
+    return (
+        <div>
+            <ProductListComponent products={products} />
+        </div>
+    );
+};
+
+export default ProductsComponent;
